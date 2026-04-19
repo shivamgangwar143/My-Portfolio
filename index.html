@@ -4,20 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shivam Gangwar | Data Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-base: #050b14;
-            --bg-surface: #0a1426;
-            --bg-terminal: #030811;
-            --text-main: #e2e8f0;
-            --text-dim: #94a3b8;
-            --neon-blue: #00f0ff;
-            --neon-green: #00ff66;
-            --neon-purple: #b026ff;
-            --glow-blue: rgba(0, 240, 255, 0.3);
-            --glow-green: rgba(0, 255, 102, 0.2);
+            --bg-dark: #0a0a0a;
+            --bg-light-dark: #121212;
+            --accent-color: #ff4a3d; /* The coral/red from the reference image */
+            --text-main: #ffffff;
+            --text-muted: #888888;
         }
 
         * {
@@ -29,647 +24,446 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-base);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
-            background-image: 
-                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Fira Code', monospace;
         }
 
         /* Navbar */
         nav {
-            position: fixed;
+            position: absolute;
             top: 0;
             width: 100%;
-            padding: 20px 50px;
+            padding: 30px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(5, 11, 20, 0.9);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            z-index: 100;
         }
 
         .logo {
-            font-family: 'Fira Code', monospace;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px var(--glow-blue);
+            letter-spacing: -1px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: var(--bg-dark);
+            border-radius: 50%;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 30px;
+            align-items: center;
+            gap: 40px;
         }
 
         .nav-links a {
             color: var(--text-main);
             text-decoration: none;
-            font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
+            font-weight: 600;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--neon-green);
+            color: var(--accent-color);
         }
 
-        /* Hero Section with Terminal */
+        .btn-nav {
+            background-color: var(--accent-color);
+            padding: 12px 30px;
+            border-radius: 2px;
+            color: white !important;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .btn-nav:hover {
+            background-color: #e03b2e;
+        }
+
+        /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 10%;
-            flex-wrap: wrap;
-            gap: 50px;
-        }
-
-        .hero-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .hero-text .sys-ready {
-            color: var(--neon-green);
-            font-family: 'Fira Code', monospace;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .hero-text h1 {
-            font-size: 4rem;
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-
-        .hero-text h2 {
-            font-size: 2.5rem;
-            color: var(--neon-blue);
-            margin-bottom: 30px;
-            text-shadow: 0 0 15px var(--glow-blue);
-        }
-
-        .hero-text p {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            max-width: 600px;
-            margin-bottom: 40px;
-        }
-
-        .btn-glow {
-            display: inline-block;
-            padding: 15px 35px;
-            background: transparent;
-            color: var(--neon-blue);
-            border: 1px solid var(--neon-blue);
-            font-family: 'Fira Code', monospace;
-            text-decoration: none;
-            border-radius: 4px;
             position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 0 10px var(--glow-blue) inset, 0 0 10px var(--glow-blue);
-        }
-
-        .btn-glow:hover {
-            background: var(--neon-blue);
-            color: var(--bg-base);
-            box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
-        }
-
-        /* Terminal Window */
-        .terminal {
-            flex: 1;
-            min-width: 350px;
-            max-width: 550px;
-            background: var(--bg-terminal);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-blue);
-            overflow: hidden;
-            font-family: 'Fira Code', monospace;
-        }
-
-        .terminal-header {
-            background: #1a202c;
-            padding: 10px;
+            height: 100vh;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(110deg, var(--bg-dark) 60%, #1a1a1a 60%);
+            overflow: hidden;
         }
 
-        .term-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .term-btn.red { background: #ff5f56; }
-        .term-btn.yellow { background: #ffbd2e; }
-        .term-btn.green { background: #27c93f; }
-
-        .terminal-title {
-            margin-left: auto;
-            margin-right: auto;
-            color: var(--text-dim);
-            font-size: 0.8rem;
+        .hero-content {
+            width: 50%;
+            padding-left: 10%;
+            z-index: 10;
         }
 
-        .terminal-body {
-            padding: 20px;
-            color: var(--neon-green);
+        .hero-subtitle {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--accent-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
             font-size: 0.9rem;
-            line-height: 1.5;
-            min-height: 300px;
+            text-transform: uppercase;
         }
 
-        .terminal-line { margin-bottom: 10px; }
-        .prompt::before { content: "shivam@master:~$ "; color: var(--neon-purple); }
-        .py-prompt::before { content: ">>> "; color: var(--neon-blue); }
-        .comment { color: #6272a4; }
-        .keyword { color: #ff79c6; }
-        .string { color: #f1fa8c; }
-        .function { color: #50fa7b; }
-
-        /* Animated Pipeline Graphic */
-        .pipeline-container {
-            margin: 80px 0;
-            padding: 40px;
-            background: var(--bg-surface);
-            border-radius: 10px;
-            border: 1px dashed rgba(0, 240, 255, 0.3);
-            position: relative;
-        }
-
-        .pipeline-title {
-            text-align: center;
-            margin-bottom: 40px;
-            color: var(--neon-blue);
-        }
-
-        .nodes {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative;
-        }
-
-        /* Connecting line */
-        .nodes::before {
+        .hero-subtitle::before {
             content: '';
-            position: absolute;
-            top: 50%;
-            left: 50px;
-            right: 50px;
+            width: 40px;
             height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 0;
+            background-color: var(--accent-color);
         }
 
-        .node {
-            background: var(--bg-terminal);
-            border: 2px solid var(--neon-blue);
-            border-radius: 50%;
-            width: 90px;
-            height: 90px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 1;
-            position: relative;
-            box-shadow: 0 0 15px var(--glow-blue) inset;
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: -2px;
         }
 
-        .node i {
-            font-size: 1.8rem;
-            color: var(--text-main);
-            margin-bottom: 5px;
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            letter-spacing: 1px;
+            border-radius: 2px;
+            transition: all 0.3s;
+            text-transform: uppercase;
         }
 
-        .node span {
-            font-size: 0.7rem;
-            font-family: 'Fira Code', monospace;
-            color: var(--neon-green);
+        .btn-primary:hover {
+            background-color: #e03b2e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 74, 61, 0.3);
         }
 
-        .data-packet {
+        .hero-image {
             position: absolute;
-            top: calc(50% - 4px);
-            left: 0;
-            width: 8px;
-            height: 8px;
-            background: var(--neon-green);
+            right: 0;
+            bottom: 0;
+            width: 45%;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 5;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            /* Filter to make the photo blend nicely with the dark background */
+            filter: grayscale(20%) contrast(110%) brightness(90%);
+            mask-image: linear-gradient(to top, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
+        }
+
+        /* Spotlight effect behind image */
+        .spotlight {
+            position: absolute;
+            right: 20%;
+            top: 20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            filter: blur(100px);
             border-radius: 50%;
-            box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
-            animation: flowData 4s infinite linear;
-            z-index: 2;
+            z-index: 1;
         }
 
-        .packet-2 { animation-delay: 1.3s; }
-        .packet-3 { animation-delay: 2.6s; }
-
-        @keyframes flowData {
-            0% { left: 5%; opacity: 0; }
-            5% { opacity: 1; }
-            95% { opacity: 1; }
-            100% { left: 95%; opacity: 0; }
+        /* Abstract Brush strokes background */
+        .brush-stroke {
+            position: absolute;
+            left: 5%;
+            bottom: 10%;
+            width: 300px;
+            height: 300px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="%23ffffff" fill-opacity="0.03" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,81.1,-46.3C90.4,-33.5,96,-18.1,96.5,-2.5C97.1,13.1,92.6,28.8,83.9,42.4C75.2,56,62.3,67.5,47.9,75.1C33.5,82.7,17.6,86.4,1.8,83.4C-14,80.4,-28.1,70.7,-41.8,61.5C-55.5,52.3,-68.8,43.6,-76.9,31.2C-85,18.8,-87.9,2.7,-84.9,-12.3C-81.9,-27.3,-73.1,-41.2,-61.6,-51.7C-50.1,-62.2,-35.9,-69.3,-22,-74.6C-8.1,-79.9,5.5,-83.4,19.3,-82C33.1,-80.6,44.7,-76.4,44.7,-76.4Z" transform="translate(100 100)" /></svg>') no-repeat center center;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        /* General Section Styling */
-        section {
+        /* Other sections below hero */
+        section.content-section {
             padding: 100px 10%;
+            background-color: var(--bg-light-dark);
         }
 
-        .section-header {
+        .section-title {
             display: flex;
             align-items: center;
-            margin-bottom: 60px;
+            gap: 15px;
+            color: var(--accent-color);
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--text-main);
+        .section-title::before {
+            content: '';
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent-color);
         }
 
-        .section-header span.num {
-            color: var(--neon-blue);
-            font-size: 2rem;
-            margin-right: 15px;
-        }
-
-        .section-header::after {
-            content: "";
-            height: 1px;
-            flex-grow: 1;
-            background: rgba(0, 240, 255, 0.2);
-            margin-left: 30px;
-        }
-
-        /* Skills Grid */
-        .tech-stack {
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
 
-        .tech-card {
-            background: var(--bg-surface);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 30px;
-            transition: transform 0.3s, border-color 0.3s;
+        .skill-card {
+            background: var(--bg-dark);
+            padding: 40px 30px;
+            border-radius: 2px;
+            border-top: 3px solid transparent;
+            transition: all 0.3s;
         }
 
-        .tech-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--neon-purple);
-            box-shadow: 0 10px 30px rgba(176, 38, 255, 0.1);
+        .skill-card:hover {
+            border-top-color: var(--accent-color);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        .tech-card h3 {
-            color: var(--neon-purple);
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
             margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        .tech-card h3 i { font-size: 1.5rem; }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 800;
         }
 
-        .tag {
-            padding: 5px 12px;
-            background: rgba(176, 38, 255, 0.1);
-            color: var(--text-main);
-            border: 1px solid rgba(176, 38, 255, 0.3);
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-family: 'Fira Code', monospace;
+        .skill-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
         }
 
-        /* Experience DAG Timeline */
-        .dag-timeline {
+        /* Timeline */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
             position: relative;
-            padding-left: 40px;
         }
 
-        .dag-timeline::before {
+        .timeline::before {
             content: '';
             position: absolute;
-            left: 10px;
+            left: 0;
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-green));
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .dag-node {
+        .timeline-item {
             position: relative;
-            margin-bottom: 60px;
+            padding-left: 40px;
+            margin-bottom: 50px;
         }
 
-        .dag-node::before {
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: -37px;
+            left: -6px;
             top: 5px;
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-color);
             border-radius: 50%;
-            background: var(--bg-base);
-            border: 3px solid var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
-            z-index: 2;
+            box-shadow: 0 0 0 5px var(--bg-light-dark);
         }
 
-        .dag-node:nth-child(2)::before {
-            border-color: var(--neon-green);
-            box-shadow: 0 0 10px var(--neon-green);
+        .timeline-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        .job-title {
+        .timeline-title {
             font-size: 1.5rem;
-            color: var(--text-main);
+            font-weight: 800;
             margin-bottom: 5px;
         }
 
-        .company {
-            color: var(--neon-blue);
+        .timeline-company {
+            color: var(--text-muted);
             font-size: 1.1rem;
             margin-bottom: 15px;
-            font-family: 'Fira Code', monospace;
         }
 
-        .duration {
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+        .timeline-desc {
+            color: #b0b0b0;
+            line-height: 1.8;
         }
 
-        .job-desc {
-            list-style: none;
-        }
-
-        .job-desc li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 12px;
-            color: var(--text-dim);
-            line-height: 1.6;
-        }
-
-        .job-desc li::before {
-            content: '>>';
-            position: absolute;
-            left: 0;
-            color: var(--neon-green);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-        }
-
-        .job-desc strong {
-            color: var(--text-main);
-        }
-
-        /* Footer */
         footer {
+            background-color: var(--bg-dark);
             text-align: center;
             padding: 40px;
-            background: var(--bg-surface);
-            border-top: 1px solid rgba(0, 240, 255, 0.1);
-            font-family: 'Fira Code', monospace;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        .social-row {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-
-        .social-row a {
-            color: var(--neon-blue);
-            font-size: 1.8rem;
-            transition: all 0.3s;
-        }
-
-        .social-row a:hover {
-            color: var(--neon-green);
-            transform: scale(1.2);
-            text-shadow: 0 0 15px var(--neon-green);
-        }
-
-        @media (max-width: 768px) {
-            .hero { padding-top: 150px; }
-            .hero-text h1 { font-size: 3rem; }
-            .hero-text h2 { font-size: 2rem; }
-            .nodes { flex-direction: column; gap: 40px; }
-            .nodes::before { width: 2px; height: 100%; top: 0; left: 50%; right: auto; margin-left: -1px; }
-            @keyframes flowData {
-                0% { top: 5%; left: calc(50% - 4px); opacity: 0; }
-                5% { opacity: 1; }
-                95% { opacity: 1; }
-                100% { top: 95%; left: calc(50% - 4px); opacity: 0; }
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                background: var(--bg-dark);
+            }
+            .hero-content {
+                width: 100%;
+                padding: 150px 5% 0 5%;
+                text-align: center;
+            }
+            .hero-subtitle {
+                justify-content: center;
+            }
+            .hero-subtitle::before {
+                display: none;
+            }
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero-image {
+                position: relative;
+                width: 100%;
+                height: 50vh;
+                margin-top: 40px;
+            }
+            .nav-links {
+                display: none; /* Add mobile menu in real app */
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Nav -->
     <nav>
-        <div class="logo">SG_</div>
+        <div class="logo">
+            <div class="logo-icon"></div>
+            Shivam<br>Gangwar
+        </div>
         <ul class="nav-links">
-            <li><a href="#about">01. About</a></li>
-            <li><a href="#skills">02. Stack</a></li>
-            <li><a href="#experience">03. Exp</a></li>
-            <li><a href="#contact">04. Contact</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="https://github.com/shivamgangwar143" target="_blank">GitHub</a></li>
+            <li><a href="#contact" class="btn-nav">CONTACT NOW</a></li>
         </ul>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-text">
-            <p class="sys-ready">System.out.println("Hello World");</p>
-            <h1>Shivam Gangwar.</h1>
-            <h2>Data Architect & Engineer.</h2>
-            <p>I build high-throughput real-time streaming pipelines and PB-scale batch processing architectures. I turn chaotic raw data into highly available, cost-efficient analytics layers.</p>
-            <a href="#contact" class="btn-glow">Initialize Contact</a>
+    <section id="home" class="hero">
+        <div class="brush-stroke"></div>
+        <div class="spotlight"></div>
+        
+        <div class="hero-content">
+            <div class="hero-subtitle">DATA ARCHITECTURE & ENGINEERING</div>
+            <h1>ENGINEERING<br>DATA MAKES US<br>POWERFUL.</h1>
+            <a href="#skills" class="btn-primary">WATCH PORTFOLIO</a>
         </div>
 
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="term-btn red"></div>
-                <div class="term-btn yellow"></div>
-                <div class="term-btn green"></div>
-                <div class="terminal-title">pyspark_job.py — bash</div>
+        <div class="hero-image">
+            <!-- Ensure your photo is named profile.jpg and placed in the same folder -->
+            <img src="profile.jpg" alt="Shivam Gangwar">
+        </div>
+    </section>
+
+    <section id="about" class="content-section">
+        <div class="section-title">Who I Am</div>
+        <div style="max-width: 800px; color: var(--text-muted); font-size: 1.2rem; line-height: 1.8;">
+            <p>I am a Data Engineer specializing in building high-throughput real-time pipelines and optimizing PB-scale architectures. I engineer cost-efficient ETL workflows that process large-scale data for millions of concurrent users.</p>
+            <br>
+            <p>Currently engineering massive data platforms at <strong>Jio Platforms Limited (JioHotstar)</strong>, focusing on Kafka streaming and PySpark batch processing.</p>
+        </div>
+    </section>
+
+    <section id="skills" class="content-section" style="background-color: var(--bg-dark);">
+        <div class="section-title">My Services & Skills</div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class="fa-solid fa-server"></i>
+                <h3>Data Pipelines</h3>
+                <p>Designing robust batch and real-time streaming architectures using Apache Kafka and PySpark to process 50K+ events per second securely.</p>
             </div>
-            <div class="terminal-body" id="typing-text">
-                <div class="terminal-line prompt">spark-submit etl_pipeline.py</div>
-                <div class="terminal-line"><span class="comment"># Initializing SparkSession...</span></div>
-                <div class="terminal-line py-prompt"><span class="keyword">import</span> pyspark.sql.functions <span class="keyword">as</span> F</div>
-                <div class="terminal-line py-prompt">df = spark.read.format(<span class="string">"kafka"</span>) \</div>
-                <div class="terminal-line">&nbsp;&nbsp;&nbsp;&nbsp;.option(<span class="string">"subscribe"</span>, <span class="string">"user_events"</span>) \</div>
-                <div class="terminal-line">&nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">load</span>()</div>
-                <div class="terminal-line"><br>[INFO] Processing 50,000 events/sec...</div>
-                <div class="terminal-line">[INFO] Writing to AWS S3 (Parquet/Snappy)...</div>
-                <div class="terminal-line" style="color:var(--neon-blue);">[SUCCESS] Pipeline executed successfully.</div>
+            <div class="skill-card">
+                <i class="fa-brands fa-aws"></i>
+                <h3>Cloud Architecture</h3>
+                <p>Building highly scalable and cost-efficient ETL workflows on AWS leveraging EMR, Glue, S3, and Redshift for massive analytics workloads.</p>
+            </div>
+            <div class="skill-card">
+                <i class="fa-solid fa-diagram-project"></i>
+                <h3>Orchestration</h3>
+                <p>Developing fault-tolerant, dependency-driven data workflows using Apache Airflow, ensuring 99.9% pipeline availability and SLA adherence.</p>
             </div>
         </div>
     </section>
 
-    <!-- About / Pipeline Visualization -->
-    <section id="about">
-        <div class="section-header">
-            <span class="num">01.</span>
-            <h2>The Data Flow</h2>
-        </div>
-        <p style="color: var(--text-dim); max-width: 800px; font-size: 1.1rem; margin-bottom: 40px;">
-            I specialize in the <strong>Medallion Architecture</strong>, taking raw JSON/CSV streams from Apache Kafka and transforming them into heavily optimized, query-ready Parquet tables in Data Warehouses like Amazon Redshift.
-        </p>
-
-        <div class="pipeline-container">
-            <h3 class="pipeline-title">Streaming & Batch Architecture</h3>
-            <div class="nodes">
-                <div class="data-packet"></div>
-                <div class="data-packet packet-2"></div>
-                <div class="data-packet packet-3"></div>
-                
-                <div class="node">
-                    <i class="fa-solid fa-server"></i>
-                    <span>KAFKA</span>
-                </div>
-                <div class="node" style="border-color: var(--neon-purple);">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span style="color: var(--neon-purple);">SPARK</span>
-                </div>
-                <div class="node" style="border-color: #cd7f32;">
-                    <i class="fa-solid fa-database"></i>
-                    <span style="color: #cd7f32;">S3 LAKE</span>
-                </div>
-                <div class="node" style="border-color: var(--neon-green);">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <span style="color: var(--neon-green);">REDSHIFT</span>
+    <section id="experience" class="content-section">
+        <div class="section-title">Professional Experience</div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <span class="timeline-date">Dec 2023 - Present</span>
+                <h3 class="timeline-title">Data Engineer</h3>
+                <div class="timeline-company">Jio Platforms Limited (JioHotstar)</div>
+                <div class="timeline-desc">
+                    Built Lambda architecture integrating real-time and batch pipelines. Optimized partitioning and caching strategies, reducing PySpark job runtime by 30% and query latency by 50% for peak events like Tata IPL.
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Stack -->
-    <section id="skills">
-        <div class="section-header">
-            <span class="num">02.</span>
-            <h2>Technology Stack</h2>
-        </div>
-
-        <div class="tech-stack">
-            <div class="tech-card">
-                <h3><i class="fa-solid fa-microchip"></i> Processing</h3>
-                <div class="tech-tags">
-                    <span class="tag">Apache Spark</span>
-                    <span class="tag">PySpark</span>
-                    <span class="tag">Apache Kafka</span>
-                    <span class="tag">Spark Streaming</span>
-                </div>
-            </div>
-
-            <div class="tech-card" style="border-color: rgba(0, 240, 255, 0.3);">
-                <h3 style="color: var(--neon-blue);"><i class="fa-brands fa-aws"></i> Cloud & Storage</h3>
-                <div class="tech-tags">
-                    <span class="tag">AWS EMR</span>
-                    <span class="tag">S3 & Glue</span>
-                    <span class="tag">Amazon Redshift</span>
-                    <span class="tag">Databricks</span>
-                    <span class="tag">Parquet/Delta</span>
-                </div>
-            </div>
-
-            <div class="tech-card" style="border-color: rgba(0, 255, 102, 0.3);">
-                <h3 style="color: var(--neon-green);"><i class="fa-solid fa-network-wired"></i> Orchestration</h3>
-                <div class="tech-tags">
-                    <span class="tag">Apache Airflow</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">Advanced SQL</span>
-                    <span class="tag">Docker</span>
+            <div class="timeline-item">
+                <span class="timeline-date">Oct 2022 - Dec 2023</span>
+                <h3 class="timeline-title">Data Analyst</h3>
+                <div class="timeline-company">Jio Platforms Limited</div>
+                <div class="timeline-desc">
+                    Monitored 30+ Airflow DAGs and performed root-cause analysis on failures. Built and maintained dimensional models and operational dashboards using Apache Superset and Advanced SQL.
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience -->
-    <section id="experience">
-        <div class="section-header">
-            <span class="num">03.</span>
-            <h2>Experience DAG</h2>
+    <footer id="contact">
+        <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 800;">Let's Build Something Great</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Reach out at shivam.gangwar@example.com</p>
+        <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 40px;">
+            <a href="https://linkedin.com/in/shivam-gangwar" target="_blank" style="color: white; font-size: 1.5rem; transition: color 0.3s;"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/shivamgangwar143" target="_blank" style="color: white; font-size: 1.5rem; transition: color 0.3s;"><i class="fa-brands fa-github"></i></a>
         </div>
-
-        <div class="dag-timeline">
-            <!-- Role 1 -->
-            <div class="dag-node">
-                <h3 class="job-title">Data Engineer</h3>
-                <div class="company">Jio Platforms Limited (JioHotstar)</div>
-                <div class="duration">Dec 2023 - Present</div>
-                <ul class="job-desc">
-                    <li>Engineered Kafka & PySpark streaming pipelines processing <strong>50K+ events/sec</strong> (~10 TB/day).</li>
-                    <li>Built auto-scaling AWS EMR & Glue ETL jobs to handle peak concurrency during <strong>Tata IPL</strong> and <strong>Bigg Boss OTT</strong>, ensuring 99.9% uptime.</li>
-                    <li>Implemented unified <strong>Lambda Architecture</strong> to bridge real-time low-latency analytics with reliable batch reporting.</li>
-                    <li>Executed file compaction and aggressive data partitioning schemes, slashing query latency by <strong>50%</strong> and AWS compute costs.</li>
-                    <li>Configured Airflow DAG retry mechanisms and alerting, reducing pipeline failures by 40%.</li>
-                </ul>
-            </div>
-
-            <!-- Role 2 -->
-            <div class="dag-node">
-                <h3 class="job-title">Data Analyst</h3>
-                <div class="company">Jio Platforms Limited</div>
-                <div class="duration">Oct 2022 - Dec 2023</div>
-                <ul class="job-desc">
-                    <li>Monitored and maintained 30+ complex Airflow DAGs to ensure strict business SLAs were met.</li>
-                    <li>Performed root-cause analysis on daily failures, collaborating with engineers to patch pipeline bugs and reduce incidents by 35%.</li>
-                    <li>Developed highly optimized SQL dimensional models and deployed 10+ live dashboards via Apache Superset.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" style="text-align: center; min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <span style="color: var(--neon-blue); font-family: 'Fira Code', monospace; margin-bottom: 20px;">04. What's Next?</span>
-        <h2 style="font-size: 3.5rem; margin-bottom: 20px; font-weight: 800;">Get In Touch</h2>
-        <p style="color: var(--text-dim); max-width: 500px; margin-bottom: 50px; line-height: 1.6;">
-            I'm currently architecting pipelines, but my inbox is always open. Whether you have a question or a Data Engineering opportunity, I'll get back to you!
-        </p>
-        <a href="mailto:shivam.gangwar@example.com" class="btn-glow" style="padding: 20px 50px; font-size: 1.2rem;">ping --contact</a>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="social-row">
-            <a href="https://github.com/shivamgangwar143" target="_blank"><i class="fa-brands fa-github"></i></a>
-            <a href="https://linkedin.com/in/shivam-gangwar" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-            <a href="mailto:shivam.gangwar@example.com"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-        <p>Built by Shivam Gangwar</p>
-        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 10px;">Designed with a Data Engineering aesthetic.</p>
+        <p style="color: #444; font-size: 0.9rem;">&copy; 2026 Shivam Gangwar. Data Engineered.</p>
     </footer>
 
 </body>
