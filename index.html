@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shivam Gangwar | Data Engineer Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <title>Shivam Gangwar | Data Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #0b1120;
-            --surface-color: #1e293b;
-            --primary-color: #38bdf8;
-            --secondary-color: #818cf8;
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --accent: #10b981;
+            --bg-base: #050b14;
+            --bg-surface: #0a1426;
+            --bg-terminal: #030811;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --neon-blue: #00f0ff;
+            --neon-green: #00ff66;
+            --neon-purple: #b026ff;
+            --glow-blue: rgba(0, 240, 255, 0.3);
+            --glow-green: rgba(0, 255, 102, 0.2);
         }
 
         * {
@@ -26,20 +29,17 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
+            background-color: var(--bg-base);
             color: var(--text-main);
-            line-height: 1.6;
             overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
         }
 
-        /* Particles Background */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            top: 0;
-            left: 0;
+        h1, h2, h3, h4 {
+            font-family: 'Fira Code', monospace;
         }
 
         /* Navbar */
@@ -51,17 +51,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(11, 17, 32, 0.85);
+            background: rgba(5, 11, 20, 0.9);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
         }
 
         .logo {
             font-family: 'Fira Code', monospace;
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--glow-blue);
         }
 
         .nav-links {
@@ -73,498 +74,603 @@
         .nav-links a {
             color: var(--text-main);
             text-decoration: none;
-            font-weight: 500;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
             transition: color 0.3s;
         }
 
         .nav-links a:hover {
-            color: var(--primary-color);
+            color: var(--neon-green);
         }
 
-        /* Hero Section */
+        /* Hero Section with Terminal */
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            align-items: flex-start;
-            padding: 0 10%;
+            padding: 100px 10%;
+            flex-wrap: wrap;
+            gap: 50px;
         }
 
-        .hero p.greeting {
-            color: var(--primary-color);
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-text .sys-ready {
+            color: var(--neon-green);
             font-family: 'Fira Code', monospace;
             margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            color: var(--text-main);
-        }
-
-        .hero h2 {
-            font-size: 3rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-        }
-
-        .hero p.summary {
-            max-width: 600px;
-            color: var(--text-muted);
             font-size: 1.1rem;
-            margin-bottom: 40px;
         }
 
-        .btn {
-            padding: 15px 30px;
-            background: transparent;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-            text-decoration: none;
-            font-family: 'Fira Code', monospace;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        .btn:hover {
-            background: rgba(56, 189, 248, 0.1);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
-        }
-
-        /* Sections Common */
-        section {
-            padding: 100px 10%;
-            min-height: 50vh;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-        }
-
-        .section-title::after {
-            content: "";
-            display: block;
-            height: 1px;
-            width: 300px;
-            background: rgba(255,255,255,0.1);
-            margin-left: 20px;
-        }
-
-        .section-title span {
-            color: var(--primary-color);
-            font-family: 'Fira Code', monospace;
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-
-        /* Skills */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-card {
-            background: var(--surface-color);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: var(--primary-color);
-        }
-
-        .skill-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-family: 'Fira Code', monospace;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
+        .hero-text h1 {
+            font-size: 4rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
             margin-bottom: 10px;
-            color: var(--text-muted);
+            letter-spacing: -1px;
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px var(--glow-blue);
+        }
+
+        .hero-text p {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .btn-glow {
+            display: inline-block;
+            padding: 15px 35px;
+            background: transparent;
+            color: var(--neon-blue);
+            border: 1px solid var(--neon-blue);
+            font-family: 'Fira Code', monospace;
+            text-decoration: none;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px var(--glow-blue) inset, 0 0 10px var(--glow-blue);
+        }
+
+        .btn-glow:hover {
+            background: var(--neon-blue);
+            color: var(--bg-base);
+            box-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+        }
+
+        /* Terminal Window */
+        .terminal {
+            flex: 1;
+            min-width: 350px;
+            max-width: 550px;
+            background: var(--bg-terminal);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow-blue);
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .terminal-header {
+            background: #1a202c;
+            padding: 10px;
             display: flex;
             align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
-        .skill-list li::before {
-            content: "▹";
-            color: var(--primary-color);
-            margin-right: 10px;
-        }
-
-        /* Experience Timeline */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 2px;
-            background: var(--surface-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1px;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: var(--bg-color);
-            border: 4px solid var(--primary-color);
-            top: 15px;
+        .term-btn {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
-            z-index: 1;
+            margin-right: 8px;
+        }
+        .term-btn.red { background: #ff5f56; }
+        .term-btn.yellow { background: #ffbd2e; }
+        .term-btn.green { background: #27c93f; }
+
+        .terminal-title {
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-dim);
+            font-size: 0.8rem;
         }
 
-        .left {
-            left: 0;
+        .terminal-body {
+            padding: 20px;
+            color: var(--neon-green);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            min-height: 300px;
         }
 
-        .right {
-            left: 50%;
-        }
+        .terminal-line { margin-bottom: 10px; }
+        .prompt::before { content: "shivam@master:~$ "; color: var(--neon-purple); }
+        .py-prompt::before { content: ">>> "; color: var(--neon-blue); }
+        .comment { color: #6272a4; }
+        .keyword { color: #ff79c6; }
+        .string { color: #f1fa8c; }
+        .function { color: #50fa7b; }
 
-        .right::after {
-            left: -10px;
-        }
-
-        .content {
-            padding: 20px 30px;
-            background-color: var(--surface-color);
+        /* Animated Pipeline Graphic */
+        .pipeline-container {
+            margin: 80px 0;
+            padding: 40px;
+            background: var(--bg-surface);
+            border-radius: 10px;
+            border: 1px dashed rgba(0, 240, 255, 0.3);
             position: relative;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .content h3 {
+        .pipeline-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--neon-blue);
+        }
+
+        .nodes {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Connecting line */
+        .nodes::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            right: 50px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 0;
+        }
+
+        .node {
+            background: var(--bg-terminal);
+            border: 2px solid var(--neon-blue);
+            border-radius: 50%;
+            width: 90px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 0 15px var(--glow-blue) inset;
+        }
+
+        .node i {
+            font-size: 1.8rem;
             color: var(--text-main);
             margin-bottom: 5px;
         }
 
-        .content h4 {
-            color: var(--primary-color);
-            font-weight: 500;
-            margin-bottom: 15px;
+        .node span {
+            font-size: 0.7rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--neon-green);
         }
 
-        .content p, .content ul {
-            color: var(--text-muted);
+        .data-packet {
+            position: absolute;
+            top: calc(50% - 4px);
+            left: 0;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+            animation: flowData 4s infinite linear;
+            z-index: 2;
+        }
+
+        .packet-2 { animation-delay: 1.3s; }
+        .packet-3 { animation-delay: 2.6s; }
+
+        @keyframes flowData {
+            0% { left: 5%; opacity: 0; }
+            5% { opacity: 1; }
+            95% { opacity: 1; }
+            100% { left: 95%; opacity: 0; }
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+        }
+
+        .section-header span.num {
+            color: var(--neon-blue);
+            font-size: 2rem;
+            margin-right: 15px;
+        }
+
+        .section-header::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: rgba(0, 240, 255, 0.2);
+            margin-left: 30px;
+        }
+
+        /* Skills Grid */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-card {
+            background: var(--bg-surface);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 30px rgba(176, 38, 255, 0.1);
+        }
+
+        .tech-card h3 {
+            color: var(--neon-purple);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tech-card h3 i { font-size: 1.5rem; }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            padding: 5px 12px;
+            background: rgba(176, 38, 255, 0.1);
+            color: var(--text-main);
+            border: 1px solid rgba(176, 38, 255, 0.3);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* Experience DAG Timeline */
+        .dag-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .dag-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-green));
+        }
+
+        .dag-node {
+            position: relative;
+            margin-bottom: 60px;
+        }
+
+        .dag-node::before {
+            content: '';
+            position: absolute;
+            left: -37px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-base);
+            border: 3px solid var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+            z-index: 2;
+        }
+
+        .dag-node:nth-child(2)::before {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 10px var(--neon-green);
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: var(--neon-blue);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .duration {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .job-desc {
+            list-style: none;
+        }
+
+        .job-desc li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .job-desc li::before {
+            content: '>>';
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
         }
 
-        .content ul {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
-
-        .content ul li {
-            margin-bottom: 8px;
-        }
-
-        /* Social Links */
-        .social-links {
-            position: fixed;
-            left: 40px;
-            bottom: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .social-links::after {
-            content: "";
-            width: 1px;
-            height: 90px;
-            background-color: var(--text-muted);
-            margin-top: 10px;
-        }
-
-        .social-links a {
-            color: var(--text-muted);
-            font-size: 1.5rem;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--primary-color);
-            transform: translateY(-3px);
+        .job-desc strong {
+            color: var(--text-main);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px;
-            color: var(--text-muted);
+            padding: 40px;
+            background: var(--bg-surface);
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
             font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* Animations via classes */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .social-row a {
+            color: var(--neon-blue);
+            font-size: 1.8rem;
+            transition: all 0.3s;
         }
 
-        @media screen and (max-width: 768px) {
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item::after { left: 21px; }
-            .right { left: 0%; }
-            .social-links { display: none; }
-            .hero h1 { font-size: 3rem; }
-            .hero h2 { font-size: 2rem; }
+        .social-row a:hover {
+            color: var(--neon-green);
+            transform: scale(1.2);
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding-top: 150px; }
+            .hero-text h1 { font-size: 3rem; }
+            .hero-text h2 { font-size: 2rem; }
+            .nodes { flex-direction: column; gap: 40px; }
+            .nodes::before { width: 2px; height: 100%; top: 0; left: 50%; right: auto; margin-left: -1px; }
+            @keyframes flowData {
+                0% { top: 5%; left: calc(50% - 4px); opacity: 0; }
+                5% { opacity: 1; }
+                95% { opacity: 1; }
+                100% { top: 95%; left: calc(50% - 4px); opacity: 0; }
+            }
         }
     </style>
 </head>
 <body>
-    
-    <!-- Particles background container -->
-    <div id="particles-js"></div>
 
-    <!-- Navigation -->
+    <!-- Nav -->
     <nav>
-        <div class="logo">SG.</div>
+        <div class="logo">SG_</div>
         <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">01. About</a></li>
+            <li><a href="#skills">02. Stack</a></li>
+            <li><a href="#experience">03. Exp</a></li>
+            <li><a href="#contact">04. Contact</a></li>
         </ul>
     </nav>
 
-    <!-- Fixed Social Links -->
-    <div class="social-links">
-        <a href="https://github.com/shivamgangwar143" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/shivam-gangwar" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:shivam.gangwar@example.com" title="Email"><i class="fas fa-envelope"></i></a>
-    </div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-text">
+            <p class="sys-ready">System.out.println("Hello World");</p>
+            <h1>Shivam Gangwar.</h1>
+            <h2>Data Architect & Engineer.</h2>
+            <p>I build high-throughput real-time streaming pipelines and PB-scale batch processing architectures. I turn chaotic raw data into highly available, cost-efficient analytics layers.</p>
+            <a href="#contact" class="btn-glow">Initialize Contact</a>
+        </div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero reveal">
-        <p class="greeting">Hi, my name is</p>
-        <h1>Shivam Gangwar.</h1>
-        <h2>I engineer data at scale.</h2>
-        <p class="summary">
-            I am a Data Engineer specializing in building high-throughput real-time pipelines and optimizing PB-scale architectures. I engineer cost-efficient ETL workflows that process large-scale data for millions of concurrent users.
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="term-btn red"></div>
+                <div class="term-btn yellow"></div>
+                <div class="term-btn green"></div>
+                <div class="terminal-title">pyspark_job.py — bash</div>
+            </div>
+            <div class="terminal-body" id="typing-text">
+                <div class="terminal-line prompt">spark-submit etl_pipeline.py</div>
+                <div class="terminal-line"><span class="comment"># Initializing SparkSession...</span></div>
+                <div class="terminal-line py-prompt"><span class="keyword">import</span> pyspark.sql.functions <span class="keyword">as</span> F</div>
+                <div class="terminal-line py-prompt">df = spark.read.format(<span class="string">"kafka"</span>) \</div>
+                <div class="terminal-line">&nbsp;&nbsp;&nbsp;&nbsp;.option(<span class="string">"subscribe"</span>, <span class="string">"user_events"</span>) \</div>
+                <div class="terminal-line">&nbsp;&nbsp;&nbsp;&nbsp;.<span class="function">load</span>()</div>
+                <div class="terminal-line"><br>[INFO] Processing 50,000 events/sec...</div>
+                <div class="terminal-line">[INFO] Writing to AWS S3 (Parquet/Snappy)...</div>
+                <div class="terminal-line" style="color:var(--neon-blue);">[SUCCESS] Pipeline executed successfully.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Pipeline Visualization -->
+    <section id="about">
+        <div class="section-header">
+            <span class="num">01.</span>
+            <h2>The Data Flow</h2>
+        </div>
+        <p style="color: var(--text-dim); max-width: 800px; font-size: 1.1rem; margin-bottom: 40px;">
+            I specialize in the <strong>Medallion Architecture</strong>, taking raw JSON/CSV streams from Apache Kafka and transforming them into heavily optimized, query-ready Parquet tables in Data Warehouses like Amazon Redshift.
         </p>
-        <a href="#contact" class="btn">Get In Touch</a>
-    </section>
 
-    <!-- About Section (merged with skills intro) -->
-    <section id="about" class="reveal">
-        <h2 class="section-title"><span>01.</span> About Me</h2>
-        <div style="max-width: 800px; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px;">
-            <p style="margin-bottom: 15px;">Hello! I'm Shivam, and I enjoy tackling complex data challenges. My interest in data engineering stems from a passion to build robust systems that convert massive streams of raw data into actionable insights efficiently.</p>
-            <p>I currently work at <strong>Jio Platforms Limited (JioHotstar)</strong> where I handle streaming architectures and massive batch processing systems. My focus is always on cost optimization, query performance, and system reliability.</p>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="reveal">
-        <h2 class="section-title"><span>02.</span> Technical Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>Processing Engines</h3>
-                <ul class="skill-list">
-                    <li>Apache Spark (PySpark)</li>
-                    <li>Apache Kafka</li>
-                    <li>Batch & Stream Processing</li>
-                    <li>Distributed Computing</li>
-                </ul>
-            </div>
-            <div class="skill-card">
-                <h3>Cloud & Infrastructure</h3>
-                <ul class="skill-list">
-                    <li>AWS (EMR, S3, Redshift)</li>
-                    <li>AWS Glue, IAM</li>
-                    <li>Databricks</li>
-                    <li>Docker</li>
-                </ul>
-            </div>
-            <div class="skill-card">
-                <h3>Data Storage & SQL</h3>
-                <ul class="skill-list">
-                    <li>Data Lakes & Warehouses</li>
-                    <li>Dimensional Modeling</li>
-                    <li>Advanced SQL (CTEs, Windows)</li>
-                    <li>Parquet & Columnar formats</li>
-                </ul>
-            </div>
-            <div class="skill-card">
-                <h3>Orchestration & DevOps</h3>
-                <ul class="skill-list">
-                    <li>Apache Airflow</li>
-                    <li>Python scripting</li>
-                    <li>Git & GitHub</li>
-                    <li>System Monitoring & Alerting</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="reveal">
-        <h2 class="section-title"><span>03.</span> Where I've Worked</h2>
-        <div class="timeline">
-            <!-- Job 1 -->
-            <div class="timeline-item left">
-                <div class="content">
-                    <h3>Data Engineer</h3>
-                    <h4>Jio Platforms Limited (JioHotstar)</h4>
-                    <p><em>Dec 2023 - Present</em></p>
-                    <ul>
-                        <li>Designed batch and real-time pipelines using Kafka & PySpark processing <strong>50K+ events/sec</strong> and <strong>~10 TB/day</strong>.</li>
-                        <li>Built cost-efficient ETL workflows via AWS Glue and EMR during peak load events like <strong>Tata IPL</strong> and Bigg Boss OTT, ensuring 99.9% availability.</li>
-                        <li>Implemented a Lambda architecture integrating real-time and batch pipelines.</li>
-                        <li>Optimized partitioning and caching, reducing PySpark job runtime by 30% and query latency by 30-50%.</li>
-                    </ul>
+        <div class="pipeline-container">
+            <h3 class="pipeline-title">Streaming & Batch Architecture</h3>
+            <div class="nodes">
+                <div class="data-packet"></div>
+                <div class="data-packet packet-2"></div>
+                <div class="data-packet packet-3"></div>
+                
+                <div class="node">
+                    <i class="fa-solid fa-server"></i>
+                    <span>KAFKA</span>
                 </div>
-            </div>
-            <!-- Job 2 -->
-            <div class="timeline-item right">
-                <div class="content">
-                    <h3>Data Analyst</h3>
-                    <h4>Jio Platforms Limited</h4>
-                    <p><em>Oct 2022 - Dec 2023</em></p>
-                    <ul>
-                        <li>Monitored and validated 30+ scheduled Airflow DAGs, ensuring 99.9% on-time pipeline execution.</li>
-                        <li>Performed root-cause analysis on failures, reducing recurring pipeline issues by 25-35%.</li>
-                        <li>Built 10+ operational dashboards in Apache Superset via optimized SQL queries.</li>
-                    </ul>
+                <div class="node" style="border-color: var(--neon-purple);">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span style="color: var(--neon-purple);">SPARK</span>
                 </div>
-            </div>
-            <!-- Education -->
-            <div class="timeline-item left">
-                <div class="content">
-                    <h3>B.Tech in Computer Science</h3>
-                    <h4>Gurukul Kangri (Deemed to be University)</h4>
-                    <p><em>Aug 2018 - Apr 2022 | Haridwar, Uttarakhand</em></p>
-                    <p>Graduated with a strong foundation in computer science principles, database systems, and software engineering.</p>
+                <div class="node" style="border-color: #cd7f32;">
+                    <i class="fa-solid fa-database"></i>
+                    <span style="color: #cd7f32;">S3 LAKE</span>
+                </div>
+                <div class="node" style="border-color: var(--neon-green);">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span style="color: var(--neon-green);">REDSHIFT</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="reveal" style="text-align: center; max-width: 600px; margin: 0 auto; min-height: 40vh;">
-        <h2 class="section-title" style="justify-content: center;"><span style="margin-right: 10px;">04.</span> What's Next?</h2>
-        <h2 style="font-size: 3rem; margin-bottom: 20px;">Get In Touch</h2>
-        <p style="color: var(--text-muted); margin-bottom: 40px;">
-            I'm currently open to new opportunities. Whether you have a question, a project proposal, or just want to say hi, I'll try my best to get back to you!
+    <!-- Skills Stack -->
+    <section id="skills">
+        <div class="section-header">
+            <span class="num">02.</span>
+            <h2>Technology Stack</h2>
+        </div>
+
+        <div class="tech-stack">
+            <div class="tech-card">
+                <h3><i class="fa-solid fa-microchip"></i> Processing</h3>
+                <div class="tech-tags">
+                    <span class="tag">Apache Spark</span>
+                    <span class="tag">PySpark</span>
+                    <span class="tag">Apache Kafka</span>
+                    <span class="tag">Spark Streaming</span>
+                </div>
+            </div>
+
+            <div class="tech-card" style="border-color: rgba(0, 240, 255, 0.3);">
+                <h3 style="color: var(--neon-blue);"><i class="fa-brands fa-aws"></i> Cloud & Storage</h3>
+                <div class="tech-tags">
+                    <span class="tag">AWS EMR</span>
+                    <span class="tag">S3 & Glue</span>
+                    <span class="tag">Amazon Redshift</span>
+                    <span class="tag">Databricks</span>
+                    <span class="tag">Parquet/Delta</span>
+                </div>
+            </div>
+
+            <div class="tech-card" style="border-color: rgba(0, 255, 102, 0.3);">
+                <h3 style="color: var(--neon-green);"><i class="fa-solid fa-network-wired"></i> Orchestration</h3>
+                <div class="tech-tags">
+                    <span class="tag">Apache Airflow</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Advanced SQL</span>
+                    <span class="tag">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+        <div class="section-header">
+            <span class="num">03.</span>
+            <h2>Experience DAG</h2>
+        </div>
+
+        <div class="dag-timeline">
+            <!-- Role 1 -->
+            <div class="dag-node">
+                <h3 class="job-title">Data Engineer</h3>
+                <div class="company">Jio Platforms Limited (JioHotstar)</div>
+                <div class="duration">Dec 2023 - Present</div>
+                <ul class="job-desc">
+                    <li>Engineered Kafka & PySpark streaming pipelines processing <strong>50K+ events/sec</strong> (~10 TB/day).</li>
+                    <li>Built auto-scaling AWS EMR & Glue ETL jobs to handle peak concurrency during <strong>Tata IPL</strong> and <strong>Bigg Boss OTT</strong>, ensuring 99.9% uptime.</li>
+                    <li>Implemented unified <strong>Lambda Architecture</strong> to bridge real-time low-latency analytics with reliable batch reporting.</li>
+                    <li>Executed file compaction and aggressive data partitioning schemes, slashing query latency by <strong>50%</strong> and AWS compute costs.</li>
+                    <li>Configured Airflow DAG retry mechanisms and alerting, reducing pipeline failures by 40%.</li>
+                </ul>
+            </div>
+
+            <!-- Role 2 -->
+            <div class="dag-node">
+                <h3 class="job-title">Data Analyst</h3>
+                <div class="company">Jio Platforms Limited</div>
+                <div class="duration">Oct 2022 - Dec 2023</div>
+                <ul class="job-desc">
+                    <li>Monitored and maintained 30+ complex Airflow DAGs to ensure strict business SLAs were met.</li>
+                    <li>Performed root-cause analysis on daily failures, collaborating with engineers to patch pipeline bugs and reduce incidents by 35%.</li>
+                    <li>Developed highly optimized SQL dimensional models and deployed 10+ live dashboards via Apache Superset.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="text-align: center; min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <span style="color: var(--neon-blue); font-family: 'Fira Code', monospace; margin-bottom: 20px;">04. What's Next?</span>
+        <h2 style="font-size: 3.5rem; margin-bottom: 20px; font-weight: 800;">Get In Touch</h2>
+        <p style="color: var(--text-dim); max-width: 500px; margin-bottom: 50px; line-height: 1.6;">
+            I'm currently architecting pipelines, but my inbox is always open. Whether you have a question or a Data Engineering opportunity, I'll get back to you!
         </p>
-        <a href="mailto:shivam.gangwar@example.com" class="btn" style="padding: 20px 40px;">Say Hello</a>
+        <a href="mailto:shivam.gangwar@example.com" class="btn-glow" style="padding: 20px 50px; font-size: 1.2rem;">ping --contact</a>
     </section>
 
+    <!-- Footer -->
     <footer>
+        <div class="social-row">
+            <a href="https://github.com/shivamgangwar143" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://linkedin.com/in/shivam-gangwar" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="mailto:shivam.gangwar@example.com"><i class="fa-solid fa-envelope"></i></a>
+        </div>
         <p>Built by Shivam Gangwar</p>
-        <p style="font-size: 0.8rem; margin-top: 5px;">Data Engineering & Architecture</p>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-top: 10px;">Designed with a Data Engineering aesthetic.</p>
     </footer>
 
-    <!-- Particles.js library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // Initialize particles.js for a nice background effect
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 40,
-                    "density": { "enable": true, "value_area": 800 }
-                },
-                "color": { "value": "#38bdf8" },
-                "shape": { "type": "circle" },
-                "opacity": {
-                    "value": 0.2,
-                    "random": false
-                },
-                "size": {
-                    "value": 3,
-                    "random": true
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#38bdf8",
-                    "opacity": 0.1,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1.5,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } },
-                    "push": { "particles_nb": 4 }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // Scroll reveal animation
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-
-        window.addEventListener("scroll", reveal);
-        // Trigger once on load
-        reveal();
-    </script>
 </body>
 </html>
