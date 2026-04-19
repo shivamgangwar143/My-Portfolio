@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Gangwar | Data Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b1120;
+            --surface-color: #1e293b;
+            --primary-color: #38bdf8;
+            --secondary-color: #818cf8;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 17, 32, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 10%;
+        }
+
+        .hero p.greeting {
+            color: var(--primary-color);
+            font-family: 'Fira Code', monospace;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .hero h2 {
+            font-size: 3rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hero p.summary {
+            max-width: 600px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            text-decoration: none;
+            font-family: 'Fira Code', monospace;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Sections Common */
+        section {
+            padding: 100px 10%;
+            min-height: 50vh;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 300px;
+            background: rgba(255,255,255,0.1);
+            margin-left: 20px;
+        }
+
+        .section-title span {
+            color: var(--primary-color);
+            font-family: 'Fira Code', monospace;
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--surface-color);
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: var(--primary-color);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-list li::before {
+            content: "▹";
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: var(--surface-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary-color);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .content {
+            padding: 20px 30px;
+            background-color: var(--surface-color);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .content h3 {
+            color: var(--text-main);
+            margin-bottom: 5px;
+        }
+
+        .content h4 {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .content p, .content ul {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .content ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Social Links */
+        .social-links {
+            position: fixed;
+            left: 40px;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .social-links::after {
+            content: "";
+            width: 1px;
+            height: 90px;
+            background-color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Animations via classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item::after { left: 21px; }
+            .right { left: 0%; }
+            .social-links { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .hero h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Particles background container -->
+    <div id="particles-js"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">SG.</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Fixed Social Links -->
+    <div class="social-links">
+        <a href="https://github.com/shivamgangwar143" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/shivam-gangwar" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:shivam.gangwar@example.com" title="Email"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero reveal">
+        <p class="greeting">Hi, my name is</p>
+        <h1>Shivam Gangwar.</h1>
+        <h2>I engineer data at scale.</h2>
+        <p class="summary">
+            I am a Data Engineer specializing in building high-throughput real-time pipelines and optimizing PB-scale architectures. I engineer cost-efficient ETL workflows that process large-scale data for millions of concurrent users.
+        </p>
+        <a href="#contact" class="btn">Get In Touch</a>
+    </section>
+
+    <!-- About Section (merged with skills intro) -->
+    <section id="about" class="reveal">
+        <h2 class="section-title"><span>01.</span> About Me</h2>
+        <div style="max-width: 800px; color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px;">
+            <p style="margin-bottom: 15px;">Hello! I'm Shivam, and I enjoy tackling complex data challenges. My interest in data engineering stems from a passion to build robust systems that convert massive streams of raw data into actionable insights efficiently.</p>
+            <p>I currently work at <strong>Jio Platforms Limited (JioHotstar)</strong> where I handle streaming architectures and massive batch processing systems. My focus is always on cost optimization, query performance, and system reliability.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="reveal">
+        <h2 class="section-title"><span>02.</span> Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>Processing Engines</h3>
+                <ul class="skill-list">
+                    <li>Apache Spark (PySpark)</li>
+                    <li>Apache Kafka</li>
+                    <li>Batch & Stream Processing</li>
+                    <li>Distributed Computing</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Cloud & Infrastructure</h3>
+                <ul class="skill-list">
+                    <li>AWS (EMR, S3, Redshift)</li>
+                    <li>AWS Glue, IAM</li>
+                    <li>Databricks</li>
+                    <li>Docker</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Data Storage & SQL</h3>
+                <ul class="skill-list">
+                    <li>Data Lakes & Warehouses</li>
+                    <li>Dimensional Modeling</li>
+                    <li>Advanced SQL (CTEs, Windows)</li>
+                    <li>Parquet & Columnar formats</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>Orchestration & DevOps</h3>
+                <ul class="skill-list">
+                    <li>Apache Airflow</li>
+                    <li>Python scripting</li>
+                    <li>Git & GitHub</li>
+                    <li>System Monitoring & Alerting</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="reveal">
+        <h2 class="section-title"><span>03.</span> Where I've Worked</h2>
+        <div class="timeline">
+            <!-- Job 1 -->
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>Data Engineer</h3>
+                    <h4>Jio Platforms Limited (JioHotstar)</h4>
+                    <p><em>Dec 2023 - Present</em></p>
+                    <ul>
+                        <li>Designed batch and real-time pipelines using Kafka & PySpark processing <strong>50K+ events/sec</strong> and <strong>~10 TB/day</strong>.</li>
+                        <li>Built cost-efficient ETL workflows via AWS Glue and EMR during peak load events like <strong>Tata IPL</strong> and Bigg Boss OTT, ensuring 99.9% availability.</li>
+                        <li>Implemented a Lambda architecture integrating real-time and batch pipelines.</li>
+                        <li>Optimized partitioning and caching, reducing PySpark job runtime by 30% and query latency by 30-50%.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Job 2 -->
+            <div class="timeline-item right">
+                <div class="content">
+                    <h3>Data Analyst</h3>
+                    <h4>Jio Platforms Limited</h4>
+                    <p><em>Oct 2022 - Dec 2023</em></p>
+                    <ul>
+                        <li>Monitored and validated 30+ scheduled Airflow DAGs, ensuring 99.9% on-time pipeline execution.</li>
+                        <li>Performed root-cause analysis on failures, reducing recurring pipeline issues by 25-35%.</li>
+                        <li>Built 10+ operational dashboards in Apache Superset via optimized SQL queries.</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Education -->
+            <div class="timeline-item left">
+                <div class="content">
+                    <h3>B.Tech in Computer Science</h3>
+                    <h4>Gurukul Kangri (Deemed to be University)</h4>
+                    <p><em>Aug 2018 - Apr 2022 | Haridwar, Uttarakhand</em></p>
+                    <p>Graduated with a strong foundation in computer science principles, database systems, and software engineering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="reveal" style="text-align: center; max-width: 600px; margin: 0 auto; min-height: 40vh;">
+        <h2 class="section-title" style="justify-content: center;"><span style="margin-right: 10px;">04.</span> What's Next?</h2>
+        <h2 style="font-size: 3rem; margin-bottom: 20px;">Get In Touch</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">
+            I'm currently open to new opportunities. Whether you have a question, a project proposal, or just want to say hi, I'll try my best to get back to you!
+        </p>
+        <a href="mailto:shivam.gangwar@example.com" class="btn" style="padding: 20px 40px;">Say Hello</a>
+    </section>
+
+    <footer>
+        <p>Built by Shivam Gangwar</p>
+        <p style="font-size: 0.8rem; margin-top: 5px;">Data Engineering & Architecture</p>
+    </footer>
+
+    <!-- Particles.js library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Initialize particles.js for a nice background effect
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 40,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#38bdf8" },
+                "shape": { "type": "circle" },
+                "opacity": {
+                    "value": 0.2,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#38bdf8",
+                    "opacity": 0.1,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1.5,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Scroll reveal animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body>
+</html>
